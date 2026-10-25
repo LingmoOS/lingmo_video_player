@@ -4,7 +4,7 @@ Priority: optional
 Maintainer: Lingmo OS Team <team@lingmo.org>
 Build-Depends: cmake,
                debhelper-compat (= 14),
-               lingmo-toolkit,
+               lingmo-sdk,
                libicu-dev,
                libmpv-dev (>= 0.35),
                pkg-config
@@ -13,7 +13,7 @@ Homepage: https://github.com/lingmoos/video-player
 
 Package: lingmo-video-player
 Architecture: any
-Depends: lingmo-toolkit,
+Depends: lingmo-sdk,
          ${misc:Depends},
          ${shlibs:Depends}
 Description: Lingmo OS Video Player

@@ -11,7 +11,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 include(GNUInstallDirs)
 include(CTest)
 
-find_package(LingmoToolkit REQUIRED)
+find_package(LingmoSDK REQUIRED)
 find_package(PkgConfig REQUIRED)
 pkg_check_modules(Mpv REQUIRED IMPORTED_TARGET mpv>=2.0)
 pkg_check_modules(ICU REQUIRED IMPORTED_TARGET icu-uc icu-i18n)
@@ -36,7 +36,7 @@ add_library(player-backend STATIC
 target_include_directories(player-backend PUBLIC src)
 # libmpv is opened on first use (src/mpvlibrary.cpp); only its headers are needed here.
 target_include_directories(player-backend PUBLIC ${Mpv_INCLUDE_DIRS})
-target_link_libraries(player-backend PUBLIC Lingmo::Toolkit ${CMAKE_DL_LIBS} PRIVATE PkgConfig::ICU)
+target_link_libraries(player-backend PUBLIC Lingmo::SDK ${CMAKE_DL_LIBS} PRIVATE PkgConfig::ICU)
 
 # The glyphs, built in.
 file(GLOB VIDEO_PLAYER_ICONS CONFIGURE_DEPENDS ${PROJECT_SOURCE_DIR}/icons/*.svg)
@@ -60,7 +60,7 @@ add_library(player-ui STATIC
     ${VIDEO_PLAYER_EMBEDDED}
 )
 target_include_directories(player-ui PUBLIC src src/views)
-target_link_libraries(player-ui PUBLIC player-backend Lingmo::Toolkit)
+target_link_libraries(player-ui PUBLIC player-backend Lingmo::SDK)
 
 add_executable(${PROJECT_NAME} src/main.cpp)
 target_compile_definitions(${PROJECT_NAME} PRIVATE VIDEO_PLAYER_VERSION="${PROJECT_VERSION}")
