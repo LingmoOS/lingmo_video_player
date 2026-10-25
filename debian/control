@@ -13,7 +13,7 @@ Homepage: https://github.com/lingmoos/video-player
 
 Package: lingmo-video-player
 Architecture: any
-Depends: lingmo-sdk,
+Depends: lingmo-sdk-dev,
          ${misc:Depends},
          ${shlibs:Depends}
 Description: Lingmo OS Video Player
