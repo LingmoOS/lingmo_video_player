@@ -28,7 +28,7 @@ MprisServer::MprisServer(base::dbus::Connection* bus, const std::string& service
     , m_description(std::move(description))
 {
     if (!m_bus) {
-        CF_WARNING(cfMpris) << "No session bus for media controls";
+        LM_WARNING(cfMpris) << "No session bus for media controls";
         return;
     }
 
@@ -212,12 +212,12 @@ MprisServer::MprisServer(base::dbus::Connection* bus, const std::string& service
     m_player->addSignal("Seeked", "x", {"Position"});
 
     if (!m_root->publish() || !m_player->publish()) {
-        CF_WARNING(cfMpris) << "Could not register the media controls object";
+        LM_WARNING(cfMpris) << "Could not register the media controls object";
         return;
     }
     m_registered = m_bus->requestName(m_name);
     if (!m_registered) {
-        CF_WARNING(cfMpris) << "Could not register" << m_name << "- already taken?";
+        LM_WARNING(cfMpris) << "Could not register" << m_name << "- already taken?";
     }
 }
 

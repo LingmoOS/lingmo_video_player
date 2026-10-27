@@ -88,7 +88,7 @@ bool Player::ensurePlayer()
     m_playerFailed = true;
     mpv_handle* mpv = mpv_create();
     if (!mpv) {
-        CF_WARNING(cfMpv) << "mpv: could not create a player";
+        LM_WARNING(cfMpv) << "mpv: could not create a player";
         return false;
     }
     m_handle->mpv = mpv;
@@ -121,7 +121,7 @@ bool Player::ensurePlayer()
     m_pendingProperties.clear();
 
     if (mpv_initialize(mpv) < 0) {
-        CF_WARNING(cfMpv) << "mpv: could not initialise the player";
+        LM_WARNING(cfMpv) << "mpv: could not initialise the player";
         mpv_destroy(mpv);
         m_handle->mpv = nullptr;
         return false;
@@ -329,7 +329,7 @@ void Player::processEvents()
         }
         case MPV_EVENT_LOG_MESSAGE: {
             const auto* message = static_cast<mpv_event_log_message*>(event->data);
-            CF_WARNING(cfMpv).printf("%s: %s", message->prefix,
+            LM_WARNING(cfMpv).printf("%s: %s", message->prefix,
                                      std::string(base::strings::trimmed(message->text)).c_str());
             break;
         }

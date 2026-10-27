@@ -98,7 +98,7 @@ void VideoSurface::fail()
 void VideoSurface::run()
 {
     if (!m_surface->makeCurrent() || !m_handle->mpv) {
-        CF_WARNING(cfVideo) << "No OpenGL context for the video";
+        LM_WARNING(cfVideo) << "No OpenGL context for the video";
         fail();
         return;
     }
@@ -115,7 +115,7 @@ void VideoSurface::run()
     };
     mpv_render_context* context = nullptr;
     if (mpv_render_context_create(&context, m_handle->mpv, params) < 0) {
-        CF_WARNING(cfVideo) << "mpv: could not create the OpenGL render context";
+        LM_WARNING(cfVideo) << "mpv: could not create the OpenGL render context";
         m_surface->doneCurrent();
         fail();
         return;
